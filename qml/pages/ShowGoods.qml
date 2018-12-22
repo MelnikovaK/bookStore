@@ -62,14 +62,15 @@ Page {
                     onClicked: delBook(modelData)
                 }
             }
-//            onClicked: pageStack.push(Qt.resolvedUrl("MoviePage.qml"), { movieId: modelData.imdbID, filmData: JSON.parse(modelData.Data) })
+            onClicked: pageStack.push(Qt.resolvedUrl("BookInfo.qml"), { bookId: modelData.bookID, bookAuthor: modelData.bookAuthor,
+                                          bookTitle: modelData.bookTitle, bookGenre: modelData.bookGenre, bookPrice: modelData.bookPrice,
+                                      bookAmount: modelData.bookAmount})
         }
         VerticalScrollDecorator {}
     }
 
     function loadDataFromDB() {
         DB.getBooks(function(books) {
-            console.log(books)
             searchList = books;
         });
     }
@@ -81,12 +82,7 @@ Page {
     function findMovies(name) {
         DB.getBooks(function(books) {
             searchList = searchList.filter(function(x) {if(x.Title == name) return x;});
-//            for ( var i = 0; i < books.length; i++) {
-//                if(books[i].Title == name){
-//                    searchList.push(books[i]);
-//                }
-//            }
-//            console.log(searchList);
+
         });
     }
 }

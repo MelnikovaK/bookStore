@@ -20,7 +20,7 @@ function removeFromBooks(bookId) {
 
 function addToBooks(bookId, bookAuthor, bookTitle, bookGenre, bookPrice, bookAmount) {
     if (!db) initialiseDB();
-    bookId = (id + 3).toString();
+     bookId = (Math.random() * 10).toString();
 
     db.transaction(function(tx) {
         tx.executeSql('INSERT INTO Books VALUES(?, ?, ?, ?, ?, ?)', [bookId, bookAuthor, bookTitle, bookGenre, bookPrice, bookAmount]);
