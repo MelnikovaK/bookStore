@@ -3,11 +3,13 @@ import Sailfish.Silica 1.0
 import QtQuick.LocalStorage 2.0
 
 import "../DB.js" as DB
+import "../WishList.js" as WL
+import "../Basket.js" as BS
 
 Page {
     property var bookData: ({})
     property string bookId: ''
-    property bool isFavorited: false
+    property bool isInWishList: false
 
     id: pageInfo
 
@@ -17,7 +19,7 @@ Page {
         contentHeight: contentColumn.visible ? (contentColumn.height + Theme.horizontalPageMargin * 2) : parent.height
 
         Column {
-            visible: !!bookData.Title
+            visible: bookData.Title
 
             id: contentColumn
             x: Theme.horizontalPageMargin
@@ -26,9 +28,16 @@ Page {
 
             PageHeader {
                 title: bookData.Title
+                Button {
+                    id: wishButton
+                    text: qsTr("<3")
+                    y: -10
+                    onClicked: toggleWish()
+                }
             }
 
             Label {
+
                 anchors.horizontalCenter: parent.horizontalCenter
                 text:'Автор: ' +  bookData.Author
             }
@@ -47,19 +56,71 @@ Page {
                 anchors.horizontalCenter: parent.horizontalCenter
                 text:'Количество : ' +  bookData.Amount
             }
+
+            Button {
+//                color: Theme.highlightColor
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: qsTr("В корзину")
+                onClicked: addToBasket()
+            }
         }
 
 }
     function loadBookInfo() {
         DB.getBooks(function(books) {
             for (var i = 0; i < books.length; i++) {
-                console.log(bookId);
-                console.log(books[i].bookID)
-                console.log(books[i].Title)
                 if (bookId == books[i].bookID)
                     bookData = books[i];
             }
-            console.log(bookData.Title);
+        });
+        if (bookId) {
+            checkWish();
+        }
+    }
+
+    function checkWish() {
+        WL.isInWishList(bookId, function(wish) {
+            isInWishList = wish;
         });
     }
+
+    function toggleWish() {
+        if (isInWishList) {
+            WL.removeFromWish(bookId, checkWish);
+        } else {
+            WL.addToWish(bookId, bookData.Title,bookData.Price, checkWish);
+        }
+        WL.getWish(function(wish) {
+            for (var i = 0; i < wish.length; i++)  {
+                console.log(wish[i].Title);
+            }
+        });
+    }
+    function addToBasket() {
+        var isIn;
+        BS.isInBasket(bookId, function(res){isIn = res;})
+        if (isIn) {
+            var amount = 0;
+            BS.getBasket(function(goods) {
+                for( var i = 0; i < goods.length; i++) {
+                    if(bookId == goods[i].ID) {
+                        amount = goods[i].Amount;
+                        break;
+                    }
+                }});
+            amount = (parseInt(amount) + 1).toString();
+            if(amount<=bookData.Amount) {
+            BS.removeFromBasket(bookId, function(){console.log('Remove!')});
+            BS.addToBasket(bookId, bookData.Title, bookData.Price,amount, function(){});}
+
+        } else {
+            BS.addToBasket(bookId, bookData.Title, bookData.Price, '1', function() {
+            console.log(bookData.Title)
+            });
+
+        }
+
+    }
+
+
 }

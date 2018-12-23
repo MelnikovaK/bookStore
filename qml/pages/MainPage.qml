@@ -25,8 +25,12 @@ Page {
         }
         model: ListModel {
             ListElement {
-                name: qsTr("Посмореть товары")
-                page: "ShowGoods"
+                name: qsTr("Посмореть книги")
+                page: "ShowBooks"
+            }
+            ListElement {
+                name: qsTr("Посмотреть товар")
+                page: "GoodsPage"
             }
             ListElement {
                 name: qsTr("Добавить книгу")
@@ -38,13 +42,22 @@ Page {
             }
 
             ListElement {
-                name: qsTr("Все товары")
+                name: qsTr("Все книги и товары")
                 page: "AllGoodsPage"
             }
 
             ListElement {
                 name: qsTr("Корзина")
                 page: "BasketPage"
+            }
+
+            ListElement {
+                name: qsTr("Список желаний")
+                page: "WishPage"
+            }
+            ListElement {
+                name: qsTr("История покупок")
+                page: "WishPage"
             }
 
         }

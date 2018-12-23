@@ -3,6 +3,8 @@ import Sailfish.Silica 1.0
 import QtQuick.LocalStorage 2.0
 
 import "../DB.js" as DB
+import "../WishList.js" as WL
+import "../Basket.js" as BS
 
 Page {
     property var searchList: []
@@ -62,9 +64,7 @@ Page {
                     onClicked: delBook(modelData)
                 }
             }
-            onClicked: pageStack.push(Qt.resolvedUrl("BookInfo.qml"), { bookId: modelData.bookID, bookAuthor: modelData.bookAuthor,
-                                          bookTitle: modelData.bookTitle, bookGenre: modelData.bookGenre, bookPrice: modelData.bookPrice,
-                                      bookAmount: modelData.bookAmount})
+            onClicked: pageStack.push(Qt.resolvedUrl("BookInfo.qml"), { bookId: modelData.bookID})
         }
         VerticalScrollDecorator {}
     }
@@ -77,11 +77,14 @@ Page {
 
     function delBook(modelData) {
         DB.removeFromBooks(modelData.bookID);
+        loadDataFromDB();
+        WL.removeFromWish(modelData.bookID, function(){});
+        BS.removeFromBasket(modelData.bookID, function(){});
     }
 
     function findMovies(name) {
         DB.getBooks(function(books) {
-            searchList = searchList.filter(function(x) {if(x.Title == name) return x;});
+            searchList = searchList.filter(function(x) {if(x.Title == name || x.Genre == name) return x;});
 
         });
     }

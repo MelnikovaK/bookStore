@@ -52,7 +52,7 @@ Page {
         Button {
             anchors.horizontalCenter: parent.horizontalCenter
             text: qsTr("Добавить книгу")
-            onClicked: addBook()
+            onClicked: addBook() && pageStack.push(Qt.resolvedUrl("ShowBooks.qml"))
         }
     }
     function addBook() {

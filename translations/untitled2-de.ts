@@ -2,6 +2,28 @@
 <!DOCTYPE TS>
 <TS version="2.1">
 <context>
+    <name>BasketPage</name>
+    <message>
+        <source>Корзина</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>X</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>BookInfo</name>
+    <message>
+        <source>&lt;3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>В корзину</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>BookPage</name>
     <message>
         <source>Добавление книги</source>
@@ -69,10 +91,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Посмореть товары</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Добавить книгу</source>
         <translation type="unfinished"></translation>
     </message>
@@ -85,22 +103,49 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Все товары</source>
+        <source>Список желаний</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Посмореть книги</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Посмотреть товар</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Все книги и товары</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>История покупок</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>ShowGoods</name>
+    <name>ShowBooks</name>
     <message>
         <source>Список книг</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Поиск</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Удалить</source>
         <translation type="unfinished"></translation>
     </message>
+</context>
+<context>
+    <name>WishPage</name>
     <message>
-        <source>Поиск</source>
+        <source>Список желаний</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>X</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
