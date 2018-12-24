@@ -2,6 +2,17 @@
 <!DOCTYPE TS>
 <TS version="2.1">
 <context>
+    <name>All</name>
+    <message>
+        <source>Все товары</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Удалить</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>BasketPage</name>
     <message>
         <source>Корзина</source>

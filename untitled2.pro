@@ -39,7 +39,8 @@ DISTFILES += qml/untitled2.qml \
     qml/DG.js \
     qml/pages/ShowGoods.qml \
     qml/pages/GoodsInfo.qml \
-    qml/History.js
+    qml/History.js \
+    qml/pages/All.qml
 
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
 

@@ -5,36 +5,23 @@ import QtQuick.LocalStorage 2.0
 import "../DB.js" as DB
 import "../WishList.js" as WL
 import "../Basket.js" as BS
+import "../DG.js" as DG
 
 Page {
-    property var searchList: []
+    property var allList: []
 
     id: page
 
 
     SilicaListView {
-        onVisibleChanged: if (visible) { loadDataFromDB() }
+        onVisibleChanged: if (visible) { loadData() }
         id: listView
-        model: searchList
+        model: allList
         anchors.fill: parent
         header: Column {
             width: parent.width
             PageHeader {
-                title: qsTr("Список книг")
-            }
-            Row {
-                width: parent.width
-                TextField {
-                    id: searchTextField
-                    width: parent.width - searchButton.width
-                    placeholderText: "Найти книгу..."
-                }
-                Button {
-                    id: searchButton
-                    text: qsTr("Поиск")
-                    y: -10
-                    onClicked: findBooks(searchTextField.text)
-                }
+                title: qsTr("Все товары")
             }
         }
         delegate: BackgroundItem {
@@ -69,9 +56,11 @@ Page {
         VerticalScrollDecorator {}
     }
 
-    function loadDataFromDB() {
+    function loadData() {
         DB.getBooks(function(books) {
-            searchList = books;
+            DG.getGoods(function(goods) {
+                allList = books.concat(goods);
+            });
         });
     }
 
@@ -82,10 +71,5 @@ Page {
         BS.removeFromBasket(modelData.bookID, function(){});
     }
 
-    function findBooks(name) {
-        DB.getBooks(function(books) {
-            searchList = searchList.filter(function(x) {if(x.Title == name || x.Genre == name) return x;});
 
-        });
-    }
 }

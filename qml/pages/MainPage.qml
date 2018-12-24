@@ -43,7 +43,7 @@ Page {
 
             ListElement {
                 name: qsTr("Все книги и товары")
-                page: "AllGoodsPage"
+                page: "All"
             }
 
             ListElement {
