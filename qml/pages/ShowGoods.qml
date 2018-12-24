@@ -33,7 +33,7 @@ Page {
                     id: searchButton
                     text: qsTr("Поиск")
                     y: -10
-                    onClicked: findMovies(searchTextField.text)
+                    onClicked: findGoods(searchTextField.text)
                 }
             }
         }
@@ -80,6 +80,13 @@ Page {
         loadDataFromDG();
         WL.removeFromWish(modelData.goodsID, function(){});
         BS.removeFromBasket(modelData.goodsID, function(){});
+    }
+
+    function findGoods(name) {
+        DB.getBooks(function(books) {
+            searchList = searchList.filter(function(x) {if(x.Title == name) return x;});
+
+        });
     }
 
 

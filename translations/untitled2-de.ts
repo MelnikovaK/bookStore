@@ -7,10 +7,6 @@
         <source>Все товары</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Удалить</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>BasketPage</name>

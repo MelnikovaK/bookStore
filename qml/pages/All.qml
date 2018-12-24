@@ -44,12 +44,6 @@ Page {
                         right: Theme.horizontalPageMargin
                     }
                 }
-                Button {
-                    anchors.right: parent.right
-                    width: parent.width/5
-                    text: qsTr("Удалить")
-                    onClicked: delBook(modelData)
-                }
             }
             onClicked: pageStack.push(Qt.resolvedUrl("BookInfo.qml"), { bookId: modelData.bookID})
         }
@@ -63,6 +57,8 @@ Page {
             });
         });
     }
+
+
 
     function delBook(modelData) {
         DB.removeFromBooks(modelData.bookID);
