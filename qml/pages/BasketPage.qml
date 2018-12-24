@@ -116,8 +116,26 @@ Page {
                     }
                 }
             });
+
+        if(!fl) {
+            DG.getGoods(function(goods) {
+                for ( var j = 0; j < goods.length; j++) {
+                    if (goods[j].goodsID == elems[i].ID) {
+                        var amount = goods[j].Amount;
+                        DG.removeFromGoods(elems[i].ID);
+                        amount = parseInt(amount) - parseInt(elems[i].ID.Amount);
+                        if (amount > 0) {
+                            DG.addToGoods(elems[i].goodsID, elems[i].Title, elems[i].Price, amount.toString());
+                        }
+                    }
+                }
+            });
+
+        } else {
+            fl = false;
+        }
         }
 
-        //BS.removeFromBasket(modelData.ID, function(){});
+        basket = [];
     }
 }
