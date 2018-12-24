@@ -89,53 +89,41 @@ Page {
     }
 
     function buy() {
-        var ids = [];
-        var amounts = [];
         var elems = [];
         BS.getBasket(function(goods) {
             elems = goods;
             for (var i = 0; i < goods.length; i++) {
                HS.addToBuy(goods[i].ID, goods[i].Title, goods[i].Price, goods[i].Amount, function(){});
-                ids.push(goods[i].ID);
-                amounts.push(goods[i].Amount);
             }
         });
-        for (var i = 0; i < ids.length; i++) {
-            var fl = false;
+        for (var i = 0; i < elems.length; i++) {
             DB.getBooks(function(books) {
                 for ( var j = 0; j < books.length; j++) {
-                    if (books[j].bookID == ids[i]) {
-                        console.log('ffff')
-                        fl = true;
+                    if (books[j].bookID == elems[i].ID) {
                         var amount = books[j].Amount;
-                        DB.removeFromBooks(ids[i]);
-                        amount = parseInt(amount) - parseInt(amounts[i]);
+                        DB.removeFromBooks(elems[i].ID);
+                        amount = parseInt(amount) - parseInt(elems[i].Amount);
                         if (amount > 0) {
                             DB.addToBooks(elems[i].bookID, elems[i].Author, elems[i].Title, elems[i].Genre, elems[i].Price, amount.toString());
                         }
                     }
                 }
             });
-
-        if(!fl) {
             DG.getGoods(function(goods) {
                 for ( var j = 0; j < goods.length; j++) {
                     if (goods[j].goodsID == elems[i].ID) {
                         var amount = goods[j].Amount;
                         DG.removeFromGoods(elems[i].ID);
-                        amount = parseInt(amount) - parseInt(elems[i].ID.Amount);
+                        amount = parseInt(amount) - parseInt(elems[i].Amount);
                         if (amount > 0) {
                             DG.addToGoods(elems[i].goodsID, elems[i].Title, elems[i].Price, amount.toString());
                         }
                     }
                 }
             });
-
-        } else {
-            fl = false;
+            BS.removeFromBasket(elems[i].ID, function(){});
         }
-        }
-
+        sum = 0;
         basket = [];
     }
 }
