@@ -4,22 +4,23 @@ import QtQuick.LocalStorage 2.0
 
 import "../DB.js" as DB
 import "../WishList.js" as WL
-import "../DG.js" as DG
+import "../Basket.js" as BS
+import "../History.js" as HS
 
 Page {
-    property var goodsWishList: []
+    property var buyList: []
 
-    id: pageWish
+    id: pageBuy
 
     SilicaListView {
-        onVisibleChanged: if (visible) { loadWish() }
+        onVisibleChanged: if (visible) { loadBuy() }
         id: listView
-        model: goodsWishList
+        model: buyList
         anchors.fill: parent
         header: Column {
             width: parent.width
             PageHeader {
-                title: qsTr("Список желаний")
+                title: qsTr("История покупок")
             }
         }
         delegate: BackgroundItem {
@@ -27,40 +28,31 @@ Page {
             Item {
                 anchors.fill: parent
                 Label {
-                    width: parent.width - yearLabel.width - Theme.horizontalPageMargin * 3
+                    width: parent.width - priceLabel.width - Theme.horizontalPageMargin * 3
                     elide: "ElideRight"
                     x: Theme.horizontalPageMargin
-                    text: modelData.Title
+                    text: 'Title'
                     anchors.left: parent.left
                     color: delegate.highlighted ? Theme.highlightColor : Theme.primaryColor
                 }
                 Label {
-                    id: yearLabel
-                    text: modelData.Price + 'Р'
+                    id: priceLabel
+                    text: modelData.Price + 'Р' + '   Кол-во:' + modelData.Amount
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.margins: {
                         right: Theme.horizontalPageMargin
                     }
                 }
-                Button {
-                    anchors.right: parent.right
-                    width: parent.width/5
-                    text: qsTr("X")
-                    onClicked: delWish(modelData)
-                }
             }
-            onClicked: pageStack.push(Qt.resolvedUrl("BookInfo.qml"), { bookId: modelData.ID})
         }
+
         VerticalScrollDecorator {}
     }
-    function loadWish() {
-        WL.getWish(function(wish) {
-            goodsWishList = wish;
+    function loadBuy() {
+        HS.getBuy(function(goods) {
+            buyList = goods;
         });
-    }
+        console.log(sum);
 
-    function delWish(modelData) {
-        WL.removeFromWish(modelData.ID, function(){});
-        loadWish();
     }
 }

@@ -2,24 +2,39 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import QtQuick.LocalStorage 2.0
 
-import "../DB.js" as DB
-import "../WishList.js" as WL
 import "../DG.js" as DG
+import "../WishList.js" as WL
+import "../Basket.js" as BS
 
 Page {
-    property var goodsWishList: []
+    property var searchList: []
 
-    id: pageWish
+    id: page
+
 
     SilicaListView {
-        onVisibleChanged: if (visible) { loadWish() }
+        onVisibleChanged: if (visible) { loadDataFromDG() }
         id: listView
-        model: goodsWishList
+        model: searchList
         anchors.fill: parent
         header: Column {
             width: parent.width
             PageHeader {
-                title: qsTr("Список желаний")
+                title: qsTr("Список товаров")
+            }
+            Row {
+                width: parent.width
+                TextField {
+                    id: searchTextField
+                    width: parent.width - searchButton.width
+                    placeholderText: "Найти товар..."
+                }
+                Button {
+                    id: searchButton
+                    text: qsTr("Поиск")
+                    y: -10
+                    onClicked: findMovies(searchTextField.text)
+                }
             }
         }
         delegate: BackgroundItem {
@@ -45,22 +60,27 @@ Page {
                 Button {
                     anchors.right: parent.right
                     width: parent.width/5
-                    text: qsTr("X")
-                    onClicked: delWish(modelData)
+                    text: qsTr("Удалить")
+                    onClicked: delGoods(modelData)
                 }
             }
-            onClicked: pageStack.push(Qt.resolvedUrl("BookInfo.qml"), { bookId: modelData.ID})
+            onClicked: pageStack.push(Qt.resolvedUrl("GoodsInfo.qml"), { goodsId: modelData.goodsID})
         }
         VerticalScrollDecorator {}
     }
-    function loadWish() {
-        WL.getWish(function(wish) {
-            goodsWishList = wish;
+
+    function loadDataFromDG() {
+        DG.getGoods(function(goods) {
+            searchList = goods;
         });
     }
 
-    function delWish(modelData) {
-        WL.removeFromWish(modelData.ID, function(){});
-        loadWish();
+    function delGoods(modelData) {
+        DG.removeFromGoods(modelData.goodsID);
+        loadDataFromDG();
+        WL.removeFromWish(modelData.goodsID, function(){});
+        BS.removeFromBasket(modelData.goodsID, function(){});
     }
+
+
 }

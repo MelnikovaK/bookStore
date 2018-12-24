@@ -11,6 +11,10 @@
         <source>X</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Купить</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>BookInfo</name>
@@ -55,10 +59,28 @@
     </message>
 </context>
 <context>
+    <name>BuyHistory</name>
+    <message>
+        <source>История покупок</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CoverPage</name>
     <message>
         <source>My Cover</source>
         <translation>Mein Cover</translation>
+    </message>
+</context>
+<context>
+    <name>GoodsInfo</name>
+    <message>
+        <source>&lt;3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>В корзину</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -127,6 +149,21 @@
     <name>ShowBooks</name>
     <message>
         <source>Список книг</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Поиск</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Удалить</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ShowGoods</name>
+    <message>
+        <source>Список товаров</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

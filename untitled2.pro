@@ -34,7 +34,12 @@ DISTFILES += qml/untitled2.qml \
     qml/WishList.js \
     qml/pages/WishPage.qml \
     qml/pages/BasketPage.qml \
-    qml/Basket.js
+    qml/Basket.js \
+    qml/History.js \
+    qml/pages/BuyHistory.qml \
+    qml/DG.js \
+    qml/pages/ShowGoods.qml \
+    qml/pages/GoodsInfo.qml
 
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
 

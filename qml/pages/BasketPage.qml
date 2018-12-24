@@ -5,9 +5,12 @@ import QtQuick.LocalStorage 2.0
 import "../DB.js" as DB
 import "../WishList.js" as WL
 import "../Basket.js" as BS
+import "../History.js" as HS
+import "../DG.js" as DG
 
 Page {
     property var basket: []
+    property real sum: 0
 
     id: pageBasket
 
@@ -49,17 +52,40 @@ Page {
                     onClicked: delBasket(modelData)
                 }
             }
+            Button {
+                text: qsTr("Купить")
+                onClicked: buy()
+            }
         }
+
+        Label {
+            width: parent.width
+            elide: "ElideRight"
+            x: Theme.horizontalPageMargin
+            text: 'Итого: ' + sum + 'Р'
+            anchors.left: parent.left
+        }
+
         VerticalScrollDecorator {}
     }
     function loadBasket() {
         BS.getBasket(function(goods) {
             basket = goods;
+            for (var i = 0; i < goods.length; i++) {
+                sum += goods[i].Price;
+                console.log(goods[i].Price)
+            }
         });
+
     }
 
     function delBasket(modelData) {
+        sum -= modelData.Price;
         BS.removeFromBasket(modelData.ID, function(){});
         loadBasket();
+    }
+
+    function buy() {
+         HS.addToBuy(bookId, bookData.Title, modelData.Price, modelData.Amount, function(){});
     }
 }

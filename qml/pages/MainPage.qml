@@ -30,7 +30,7 @@ Page {
             }
             ListElement {
                 name: qsTr("Посмотреть товар")
-                page: "GoodsPage"
+                page: "ShowGoods"
             }
             ListElement {
                 name: qsTr("Добавить книгу")
@@ -57,7 +57,7 @@ Page {
             }
             ListElement {
                 name: qsTr("История покупок")
-                page: "WishPage"
+                page: "BuyHistory"
             }
 
         }

@@ -5,7 +5,7 @@ function initialiseDB() {
 
     db.transaction(function(tx) {
         tx.executeSql('CREATE TABLE IF NOT EXISTS Basket(Id TEXT, title TEXT, price TEXT, amount Text)');
-        console.log('Database initialized');
+        //console.log('Database initialized');
     });
 }
 
