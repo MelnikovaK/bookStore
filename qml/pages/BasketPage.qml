@@ -103,8 +103,11 @@ Page {
                         var amount = books[j].Amount;
                         DB.removeFromBooks(elems[i].ID);
                         amount = parseInt(amount) - parseInt(elems[i].Amount);
-                        if (amount > 0) {
+                        if (amount >= 1) {
                             DB.addToBooks(elems[i].bookID, elems[i].Author, elems[i].Title, elems[i].Genre, elems[i].Price, amount.toString());
+                        }
+                        else {
+                        WL.removeFromWish(elems[i].ID, function(){});
                         }
                     }
                 }
@@ -115,9 +118,11 @@ Page {
                         var amount = goods[j].Amount;
                         DG.removeFromGoods(elems[i].ID);
                         amount = parseInt(amount) - parseInt(elems[i].Amount);
-                        if (amount > 0) {
+                        if (amount >= 1) {
                             DG.addToGoods(elems[i].goodsID, elems[i].Title, elems[i].Price, amount.toString());
-                        }
+                        } else {
+                            WL.removeFromWish(elems[i].ID, function(){});
+                            }
                     }
                 }
             });

@@ -43,21 +43,29 @@ Page {
         }
     }
     function addGoods() {
+        var isError = false;
         var price = parseInt(textAreaPrice.text);
         var amount = parseInt(textAreaAmount.text);
         if (price < 0 || isNaN(price)) {
             textAreaPrice.text = 'Неверный ввод!';
-            if(amount < 0 || isNaN(amount)){
-                        textAreaAmount.text = 'Неверный ввод!';
-            }
+            isError = true;
         }
-        else if(amount < 0 || isNaN(amount)){
+       if(amount < 0 || isNaN(amount)){
             textAreaAmount.text = 'Неверный ввод!';
-        } else {
+            isError = true;
+        }
+       if(textAreaTitle.text=='') {
+           textAreaTitle.text = 'Заполните поле!'
+           isError = true;
+       }
+       console.log(isError);
+       if(!isError) {
+           console.log('dddd');
         DG.addToGoods(goodsId, textAreaTitle.text, textAreaPrice.text, textAreaAmount.text);
         DG.getGoods(function(favs) {
             searchList = favs;
-                });
-        }
+       });
+       }
+
     }
 }

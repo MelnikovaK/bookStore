@@ -56,22 +56,36 @@ Page {
         }
     }
     function addBook() {
+        var isError = false;
         var price = parseInt(textAreaPrice.text);
         var amount = parseInt(textAreaAmount.text);
         if (price < 0 || isNaN(price)) {
             textAreaPrice.text = 'Неверный ввод!';
-            if(amount < 0 || isNaN(amount)){
-                        textAreaAmount.text = 'Неверный ввод!';
-            }
+            isError = true;
         }
-        else if(amount < 0 || isNaN(amount)){
+       if(amount < 0 || isNaN(amount)){
             textAreaAmount.text = 'Неверный ввод!';
-        } else {
+            isError = true;
+        }
+       if(textAreaAuthor == '') {
+           textAreaAuthor.text = 'Заполните поле!'
+           isError = true;
+       }
+       if(textAreaTitle == '') {
+           textAreaTitle.text = 'Заполните поле!'
+           isError = true;
+       }
+       if(textAreaGenre == '') {
+           textAreaGenre.text = 'Заполните поле!'
+           isError = true;
+       }
+       if(!isError) {
         DB.addToBooks(bookId, textAreaAuthor.text, textAreaTitle.text, textAreaGenre.text, textAreaPrice.text, textAreaAmount.text);
         DB.getBooks(function(favs) {
             searchList = favs;
          });
-        }
+       }
+
     }
 }
 
