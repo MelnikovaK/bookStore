@@ -58,7 +58,6 @@ Page {
             }
 
             Button {
-//                color: Theme.highlightColor
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: qsTr("В корзину")
                 onClicked: addToBasket()
@@ -112,11 +111,10 @@ Page {
                 }});
             amount = (parseInt(amount) + 1).toString();
             price = (parseInt(price) + parseInt(bookData.Price)).toString();
-            if(amount<=bookData.Amount) {
-            BS.removeFromBasket(bookId, function(){console.log('Remove!')});
-            BS.addToBasket(bookId, bookData.Title, price, amount, function(){});}
-
-        } else {
+            if(parseInt(amount) <= parseInt(bookData.Amount)) {
+                BS.removeFromBasket(bookId, function(){console.log('Remove!')});
+                BS.addToBasket(bookId, bookData.Title, price, amount, function(){});}
+            } else {
             BS.addToBasket(bookId, bookData.Title, bookData.Price, '1', function() {
             console.log(bookData.Title)
             });

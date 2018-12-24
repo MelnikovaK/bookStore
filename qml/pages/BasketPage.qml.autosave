@@ -117,6 +117,20 @@ Page {
                 }
             });
         }
+        if(!fl) {
+            DG.getGoods(function(goods) {
+                for ( var j = 0; j < goods.length; j++) {
+                    if (goods[j].bookID == ids[i]) {
+                        DB.removeFromBooks(ids[i]);
+                        amount = parseInt(amount) - parseInt(amounts[i]);
+                        if (amount > 0) {
+                            DB.addToBooks(elems[i].bookID, elems[i].Author, elems[i].Title, elems[i].Genre, elems[i].Price, amount.toString());
+                        }
+                    }
+                }
+            });
+            }
+        }
 
         //BS.removeFromBasket(modelData.ID, function(){});
     }

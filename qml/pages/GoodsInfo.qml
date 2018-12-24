@@ -90,19 +90,21 @@ Page {
         BS.isInBasket(goodsId, function(res){isIn = res;})
         if (isIn) {
             var amount = 0;
+            var price = 0;
             BS.getBasket(function(goods) {
                 for( var i = 0; i < goods.length; i++) {
                     if(goodsId == goods[i].ID) {
                         amount = goods[i].Amount;
+                        price = goods[i].Price;
                         break;
                     }
                 }});
             amount = (parseInt(amount) + 1).toString();
-            if(amount<=goodsData.Amount) {
-            BS.removeFromBasket(goodsId, function(){console.log('Remove!')});
-            BS.addToBasket(goodsId, goodsData.Title, goodsData.Price,amount, function(){});}
-
-        } else {
+            price = (parseInt(price) + parseInt(goodsData.Price)).toString();
+            if(parseInt(amount) <= parseInt(goodsData.Amount)) {
+                BS.removeFromBasket(goodsId, function(){console.log('Remove!')});
+                BS.addToBasket(goodsId, goodsData.Title, price, amount, function(){});}
+            } else {
             BS.addToBasket(goodsId, goodsData.Title, goodsData.Price, '1', function() {
             console.log(goodsData.Title)
             });

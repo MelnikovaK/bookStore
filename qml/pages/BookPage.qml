@@ -57,7 +57,6 @@ Page {
     }
     function addBook() {
         var price = parseInt(textAreaPrice.text);
-        console.log(price);
         var amount = parseInt(textAreaAmount.text);
         if (price < 0 || isNaN(price)) {
             textAreaPrice.text = 'Неверный ввод!';

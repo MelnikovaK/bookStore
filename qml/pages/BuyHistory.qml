@@ -31,7 +31,7 @@ Page {
                     width: parent.width - priceLabel.width - Theme.horizontalPageMargin * 3
                     elide: "ElideRight"
                     x: Theme.horizontalPageMargin
-                    text: 'Title'
+                    text: modelData.Title
                     anchors.left: parent.left
                     color: delegate.highlighted ? Theme.highlightColor : Theme.primaryColor
                 }
@@ -52,7 +52,6 @@ Page {
         HS.getBuy(function(goods) {
             buyList = goods;
         });
-        console.log(sum);
 
     }
 }
